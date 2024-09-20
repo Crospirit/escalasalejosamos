@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escalas de Alejo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        h1 {
+            text-align: center;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .title {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title">Calculadoras para Alejo</div>
+
+    <!-- Escala de Coma de Glasgow -->
+    <div class="container">
+        <h1>Escala de Coma de Glasgow (Valoración de conciencia)</h1>
+
+        <label for="ocular">Respuesta ocular:</label>
+        <select id="ocular">
+            <option value="4">Apertura ocular espontánea (4 puntos)</option>
+            <option value="3">Apertura ocular al hablar (3 puntos)</option>
+            <option value="2">Apertura ocular al dolor (2 puntos)</option>
+            <option value="1">No hay apertura ocular (1 punto)</option>
+        </select>
+
+        <label for="verbal">Respuesta verbal:</label>
+        <select id="verbal">
+            <option value="5">Orientado y conversando (5 puntos)</option>
+            <option value="4">Desorientado pero conversando (4 puntos)</option>
+            <option value="3">Palabras inapropiadas (3 puntos)</option>
+            <option value="2">Sonidos incomprensibles (2 puntos)</option>
+            <option value="1">No hay respuesta verbal (1 punto)</option>
+        </select>
+
+        <label for="motora">Respuesta motora:</label>
+        <select id="motora">
+            <option value="6">Obedece órdenes (6 puntos)</option>
+            <option value="5">Localiza el dolor (5 puntos)</option>
+            <option value="4">Retira al dolor (4 puntos)</option>
+            <option value="3">Flexión anormal (decorticación) (3 puntos)</option>
+            <option value="2">Extensión anormal (descerebración) (2 puntos)</option>
+            <option value="1">No hay respuesta motora (1 punto)</option>
+        </select>
+
+        <button onclick="calcularGCS()">Calcular GCS</button>
+        <div class="result" id="resultadoGCS"></div>
+    </div>
+
+    <!-- Índice de Barthel -->
+    <div class="container">
+        <h1>Índice de Barthel (Independencia funcional)</h1>
+
+        <label for="alimentacion">Alimentación:</label>
+        <select id="alimentacion">
+            <option value="10">Independiente (10 puntos)</option>
+            <option value="5">Necesita ayuda (5 puntos)</option>
+            <option value="0">Dependiente (0 puntos)</option>
+        </select>
+
+        <label for="baño">Baño:</label>
+        <select id="baño">
+            <option value="5">Independiente (5 puntos)</option>
+            <option value="0">Dependiente (0 puntos)</option>
+        </select>
+
+        <label for="vestirse">Vestirse:</label>
+        <select id="vestirse">
+            <option value="10">Independiente (10 puntos)</option>
+            <option value="5">Necesita ayuda (5 puntos)</option>
+            <option value="0">Dependiente (0 puntos)</option>
+        </select>
+
+        <label for="miccion">Control de micción:</label>
+        <select id="miccion">
+            <option value="10">Continente (10 puntos)</option>
+            <option value="5">Accidentes ocasionales (5 puntos)</option>
+            <option value="0">Incontinente (0 puntos)</option>
+        </select>
+
+        <label for="deposicion">Control de deposición:</label>
+        <select id="deposicion">
+            <option value="10">Continente (10 puntos)</option>
+            <option value="5">Accidentes ocasionales (5 puntos)</option>
+            <option value="0">Incontinente (0 puntos)</option>
+        </select>
+
+        <label for="usoRetrete">Uso del retrete:</label>
+        <select id="usoRetrete">
+            <option value="10">Independiente (10 puntos)</option>
+            <option value="5">Necesita ayuda (5 puntos)</option>
+            <option value="0">Dependiente (0 puntos)</option>
+        </select>
+
+        <label for="trasladoSillaCama">Traslado silla a cama:</label>
+        <select id="trasladoSillaCama">
+            <option value="15">Independiente (15 puntos)</option>
+            <option value="10">Mínima ayuda (10 puntos)</option>
+            <option value="5">Gran ayuda (5 puntos)</option>
+            <option value="0">Dependiente (0 puntos)</option>
+        </select>
+
+        <label for="deambular">Deambulación:</label>
+        <select id="deambular">
+            <option value="15">Independiente (15 puntos)</option>
+            <option value="10">Necesita ayuda (10 puntos)</option>
+            <option value="5">Dependiente (5 puntos)</option>
+        </select>
+
+        <label for="escaleras">Subir y bajar escaleras:</label>
+        <select id="escaleras">
+            <option value="10">Independiente (10 puntos)</option>
+            <option value="5">Necesita ayuda (5 puntos)</option>
+            <option value="0">Dependiente (0 puntos)</option>
+        </select>
+
+        <button onclick="calcularBarthel()">Calcular Barthel</button>
+        <div class="result" id="resultadoBarthel"></div>
+    </div>
+
+    <!-- Test de Fagerström -->
+    <div class="container">
+        <h1>Test de Fagerström (Dependencia de la nicotina)</h1>
+
+        <label for="pregunta1">¿Cuánto tiempo pasa entre que se despierta y fuma su primer cigarrillo?</label>
+        <select id="pregunta1">
+            <option value="3">Menos de 5 minutos (3 puntos)</option>
+            <option value="2">6-30 minutos (2 puntos)</option>
+            <option value="1">31-60 minutos (1 punto)</option>
+            <option value="0">Más de 60 minutos (0 puntos)</option>
+        </select>
+
+        <label for="pregunta2">¿Le cuesta no fumar en lugares prohibidos?</label>
+        <select id="pregunta2">
+            <option value="1">Sí (1 punto)</option>
+            <option value="0">No (0 puntos)</option>
+        </select>
+
+        <label for="pregunta3">¿Qué cigarrillo es el que más disfruta?</label>
+        <select id="pregunta3">
+            <option value="1">El primero del día (1 punto)</option>
+            <option value="0">Otro (0 puntos)</option>
+        </select>
+
+        <label for="pregunta4">¿Cuántos cigarrillos fuma al día?</label>
+        <select id="pregunta4">
+            <option value="3">Más de 30 (3 puntos)</option>
+            <option value="2">21-30 (2 puntos)</option>
+            <option value="1">11-20 (1 punto)</option>
+            <option value="0">Menos de 10 (0 puntos)</option>
+        </select>
+
+        <label for="pregunta5">¿Fuma más durante las primeras horas del día?</label>
+        <select id="pregunta5">
+            <option value="1">Sí (1 punto)</option>
+            <option value="0">No (0 puntos)</option>
+        </select>
+
+        <label for="pregunta6">¿Fuma aunque esté enfermo y tenga que guardar cama?</label>
+        <select id="pregunta6">
+            <option value="1">Sí (1 punto)</option>
+            <option value="0">No (0 puntos)</option>
+        </select>
+
+        <button onclick="calcularFagerstrom()">Calcular Fagerström</button>
+        <div class="result" id="resultadoFagerstrom"></div>
+    </div>
+
+    <script>
+        // Cálculo de la Escala de Coma de Glasgow
+        function calcularGCS() {
+            const ocular = parseInt(document.getElementById('ocular').value);
+            const verbal = parseInt(document.getElementById('verbal').value);
+            const motora = parseInt(document.getElementById('motora').value);
+            const total = ocular + verbal + motora;
+            let clasificacion = '';
+
+            if (total >= 13 && total <= 15) {
+                clasificacion = 'Lesión cerebral leve';
+            } else if (total >= 9 && total <= 12) {
+                clasificacion = 'Lesión cerebral moderada';
+            } else if (total >= 3 && total <= 8) {
+                clasificacion = 'Lesión cerebral grave';
+            }
+
+            document.getElementById('resultadoGCS').innerHTML = `Puntuación GCS: ${total} - ${clasificacion}`;
+        }
+
+        // Cálculo del Índice de Barthel
+        function calcularBarthel() {
+            const alimentacion = parseInt(document.getElementById('alimentacion').value);
+            const baño = parseInt(document.getElementById('baño').value);
+            const vestirse = parseInt(document.getElementById('vestirse').value);
+            const miccion = parseInt(document.getElementById('miccion').value);
+            const deposicion = parseInt(document.getElementById('deposicion').value);
+            const usoRetrete = parseInt(document.getElementById('usoRetrete').value);
+            const trasladoSillaCama = parseInt(document.getElementById('trasladoSillaCama').value);
+            const deambular = parseInt(document.getElementById('deambular').value);
+            const escaleras = parseInt(document.getElementById('escaleras').value);
+            const total = alimentacion + baño + vestirse + miccion + deposicion + usoRetrete + trasladoSillaCama + deambular + escaleras;
+
+            document.getElementById('resultadoBarthel').innerHTML = `Puntuación Barthel: ${total}`;
+        }
+
+        // Cálculo del Test de Fagerström
+        function calcularFagerstrom() {
+            const pregunta1 = parseInt(document.getElementById('pregunta1').value);
+            const pregunta2 = parseInt(document.getElementById('pregunta2').value);
+            const pregunta3 = parseInt(document.getElementById('pregunta3').value);
+            const pregunta4 = parseInt(document.getElementById('pregunta4').value);
+            const pregunta5 = parseInt(document.getElementById('pregunta5').value);
+            const pregunta6 = parseInt(document.getElementById('pregunta6').value);
+            const total = pregunta1 + pregunta2 + pregunta3 + pregunta4 + pregunta5 + pregunta6;
+
+            document.getElementById('resultadoFagerstrom').innerHTML = `Puntuación Fagerström: ${total}`;
+        }
+    </script>
+Creado por Eloy Díaz
+</body>
+</html>
